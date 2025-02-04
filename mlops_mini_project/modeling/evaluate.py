@@ -1,6 +1,5 @@
 # updated model evaluation
 
-from unittest.mock import Base
 import numpy as np
 import pandas as pd
 import pickle
@@ -12,21 +11,9 @@ import mlflow.sklearn
 import dagshub
 from sklearn.base import BaseEstimator
 import os
+from mlflow.models import infer_signature
 
-from mlops_mini_project.config  import MODELS_DIR, PROCESSED_DATA_DIR, REPORTS_DIR
-
-# # Set up DagsHub credentials for MLflow tracking
-# dagshub_token = os.getenv("DAGSHUB_PAT")
-# if not dagshub_token:
-#     raise EnvironmentError("DAGSHUB_PAT environment variable is not set")
-
-# os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
-# os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
-
-dagshub_url = "https://dagshub.com"
-repo_owner = "kameshkotwani"
-repo_name = "mlops_mini_project"
-
+from mlops_mini_project.config import MODELS_DIR, PROCESSED_DATA_DIR, REPORTS_DIR, MLFLOW_TRACKING_URI
 
 # logging configuration
 logger = logging.getLogger('model_evaluation')
@@ -120,7 +107,7 @@ def main():
     dagshub.init(repo_owner='kameshkotwani', repo_name='mlops-mini-project', mlflow=True)
 
     # Set up MLflow tracking URI
-    mlflow.set_tracking_uri("https://dagshub.com/kameshkotwani/mlops-mini-project.mlflow")
+    mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     mlflow.set_experiment("dvc-pipeline")
     with mlflow.start_run() as run:  # Start an MLflow run
         try:
@@ -143,9 +130,9 @@ def main():
                 params = clf.get_params()
                 for param_name, param_value in params.items():
                     mlflow.log_param(param_name, param_value)
-            
-            # Log model to MLflow
-            mlflow.sklearn.log_model(clf, "model")
+
+            # Log model to MLflow with signature of the model
+            mlflow.sklearn.log_model(clf, "model",signature=infer_signature(X_test,y_test))
             
             # Save model info
             save_model_info(run.info.run_id, "model", REPORTS_DIR / 'model_info.json')

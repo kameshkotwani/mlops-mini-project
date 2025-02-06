@@ -7,7 +7,7 @@ import yaml
 import logging
 import pickle
 from config import INTERIM_DATA_DIR, MODELS_DIR, PARAMS_FILE, PROCESSED_DATA_DIR
-
+from pathlib import Path
 # logging configuration
 logger = logging.getLogger('feature_engineering')
 logger.setLevel('DEBUG')
@@ -75,8 +75,8 @@ def apply_bow(train_data: pd.DataFrame, test_data: pd.DataFrame, max_features: i
         test_df = pd.DataFrame(X_test_bow.toarray())
         test_df['label'] = y_test
 
-        pickle.dump(vectorizer, open(MODELS_DIR / 'vectorizer.pkl', 'wb'))
-
+        with Path(MODELS_DIR / "vectorizer.pkl").open("wb") as f:
+            pickle.dump(vectorizer, f)
 
 
         logger.debug('Bag of Words applied and data transformed')

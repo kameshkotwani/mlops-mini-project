@@ -44,57 +44,57 @@ stages:
       nfiles: 2
     - path: mlops_mini_project/features.py
       hash: md5
-      md5: 19f88b13e7ec1faeeb52ade79689c5fe
-      size: 3829
+      md5: 0e3eab50730ef4404d311c52a38aace1
+      size: 3882
     params:
       params.yaml:
-        feature_engineering.max_features: 3500
+        feature_engineering.max_features: 5000
     outs:
     - path: data/processed
       hash: md5
-      md5: 5a6ec8baa61d36a8459113da34c68797.dir
-      size: 72671540
+      md5: 816d3efc542c5c1f4554e9c8fa4a6728.dir
+      size: 103808540
       nfiles: 2
     - path: models/vectorizer.pkl
       hash: md5
-      md5: e4cbe364b34064bede0eb3297dbeb844
-      size: 97161
+      md5: 8f1439028a20c6ffad4fd59363c63246
+      size: 139998
   model_building:
     cmd: python -m mlops_mini_project.modeling.train
     deps:
     - path: data/processed
       hash: md5
-      md5: 5a6ec8baa61d36a8459113da34c68797.dir
-      size: 72671540
+      md5: 816d3efc542c5c1f4554e9c8fa4a6728.dir
+      size: 103808540
       nfiles: 2
     - path: mlops_mini_project/modeling/train.py
       hash: md5
-      md5: bb4fc1c97843d704870fe616ca3e2d57
-      size: 2396
+      md5: 968b40531758d423036a182d4f9e53da
+      size: 2395
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: fb517fd04d333c43e6c21b923ef19560
-      size: 28717
+      md5: 4ed025d0ae204af5424a6844604ec60c
+      size: 40717
   model_evaluation:
     cmd: python -m mlops_mini_project.modeling.evaluate
     deps:
     - path: mlops_mini_project/modeling/evaluate.py
       hash: md5
-      md5: c0960cc8d3d676ea46a79a345395d1a2
-      size: 5518
+      md5: 8923bcc56676231c509caa3013266484
+      size: 5570
     - path: models/model.pkl
       hash: md5
-      md5: fb517fd04d333c43e6c21b923ef19560
-      size: 28717
+      md5: 4ed025d0ae204af5424a6844604ec60c
+      size: 40717
     outs:
     - path: reports/metrics.json
       hash: md5
-      md5: a09a4d6b967a14de5cdc17f78bd35df1
-      size: 139
+      md5: b49b3422953958c755a7211e10c44dcc
+      size: 140
     - path: reports/model_info.json
       hash: md5
-      md5: b3e14671575c782e7128d102afbc9ef9
+      md5: 547fc10ba2b6a3c80088912f5c3ea3b3
       size: 79
   model_registration:
     cmd: python -m mlops_mini_project.modeling.register_model
@@ -105,5 +105,5 @@ stages:
       size: 2497
     - path: reports/model_info.json
       hash: md5
-      md5: b3e14671575c782e7128d102afbc9ef9
+      md5: fd5e0c6e890d3ad679640603c3c267b4
       size: 79

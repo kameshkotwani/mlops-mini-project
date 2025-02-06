@@ -133,7 +133,10 @@ def main():
 
             # Log model to MLflow with signature of the model
             mlflow.sklearn.log_model(clf, "model",signature=infer_signature(X_test,y_test))
-            
+
+            # logging the vectorizer pkl file in mlflow artifacts
+            mlflow.log_artifact(MODELS_DIR / 'vectorizer.pkl')
+
             # Save model info
             save_model_info(run.info.run_id, "model", REPORTS_DIR / 'model_info.json')
             

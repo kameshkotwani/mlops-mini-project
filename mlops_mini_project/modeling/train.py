@@ -25,6 +25,7 @@ file_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 
+
 def load_data(file_path: str) -> pd.DataFrame:
     """Load data from a CSV file."""
     try:
@@ -38,6 +39,7 @@ def load_data(file_path: str) -> pd.DataFrame:
         logger.error('Unexpected error occurred while loading the data: %s', e)
         raise
 
+
 def train_model(X_train: np.ndarray, y_train: np.ndarray) -> LogisticRegression:
     """Train the Logistic Regression model."""
     try:
@@ -49,7 +51,8 @@ def train_model(X_train: np.ndarray, y_train: np.ndarray) -> LogisticRegression:
         logger.error('Error during model training: %s', e)
         raise
 
-def save_model(model, file_path: str) -> None:
+
+def save_model(model, file_path: Path) -> None:
     """Save the trained model to a file."""
     try:
         with open(file_path, 'wb') as file:
@@ -59,6 +62,7 @@ def save_model(model, file_path: str) -> None:
         logger.error('Error occurred while saving the model: %s', e)
         raise
 
+
 def main():
     try:
 
@@ -67,11 +71,12 @@ def main():
         y_train = train_data.iloc[:, -1].values
 
         clf = train_model(X_train, y_train)
-        
+
         save_model(clf, Path(MODELS_DIR) / "model.pkl")
     except Exception as e:
         logger.error('Failed to complete the model building process: %s', e)
         print(f"Error: {e}")
+
 
 if __name__ == '__main__':
     main()

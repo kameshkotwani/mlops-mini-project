@@ -47,8 +47,9 @@ stages:
     outs:
     - reports/model_info.json  # Add the model_info.json file as an output
 
-  model_registration:
-     cmd: python -m mlops_mini_project.modeling.register_model
-     deps:
-     - reports/model_info.json
-     - mlops_mini_project/modeling/register_model.py
+# model registration since MLFLOW 2.9 is deprecated and hence no longer supported.
+#  model_registration:
+#     cmd: python -m mlops_mini_project.modeling.register_model
+#     deps:
+#     - reports/model_info.json
+#     - mlops_mini_project/modeling/register_model.py

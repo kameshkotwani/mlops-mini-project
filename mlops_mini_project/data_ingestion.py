@@ -5,8 +5,8 @@ import os
 from sklearn.model_selection import train_test_split
 import yaml
 import logging
-from config import DATA_DIR,RAW_DATA_DIR,PARAMS_FILE
-
+from config import DATA_DIR,RAW_DATA_DIR,PARAMS_FILE,LOGS_DIR
+from pathlib import Path
 # logging configuration
 logger = logging.getLogger('data_ingestion')
 logger.setLevel('DEBUG')
@@ -14,8 +14,8 @@ logger.setLevel('DEBUG')
 console_handler = logging.StreamHandler()
 console_handler.setLevel('DEBUG')
 
-file_handler = logging.FileHandler('errors.log')
-file_handler.setLevel('ERROR')
+file_handler = logging.FileHandler(Path(LOGS_DIR) / f"{Path(__file__).stem}.log")
+file_handler.setLevel('DEBUG')
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(formatter)

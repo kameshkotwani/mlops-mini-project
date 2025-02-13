@@ -23,12 +23,11 @@ REPORTS_DIR = PROJ_ROOT / "reports"
 FIGURES_DIR = REPORTS_DIR / "figures"
 
 PARAMS_FILE = PROJ_ROOT / "params.yaml"
-# If tqdm is installed, configure loguru with tqdm.write
-# https://github.com/Delgan/loguru/issues/135
-try:
-    from tqdm import tqdm
 
-    logger.remove(0)
-    logger.add(lambda msg: tqdm.write(msg, end=""), colorize=True)
-except ModuleNotFoundError:
-    pass
+LOGS_DIR = PROJ_ROOT / "logs"
+
+
+# models aliases
+STAGING = "staging"
+PRODUCTION = "production"
+DEVELOPMENT = "development"

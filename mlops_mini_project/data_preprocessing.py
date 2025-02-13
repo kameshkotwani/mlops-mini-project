@@ -9,8 +9,8 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import logging
-
-from config import INTERIM_DATA_DIR, RAW_DATA_DIR
+from pathlib import Path
+from config import INTERIM_DATA_DIR, RAW_DATA_DIR, LOGS_DIR
 
 # logging configuration
 logger = logging.getLogger('data_transformation')
@@ -19,8 +19,8 @@ logger.setLevel('DEBUG')
 console_handler = logging.StreamHandler()
 console_handler.setLevel('DEBUG')
 
-file_handler = logging.FileHandler('transformation_errors.log')
-file_handler.setLevel('ERROR')
+file_handler = logging.FileHandler(Path(LOGS_DIR) / f"{Path(__file__).stem}.log")
+file_handler.setLevel('DEBUG')
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(formatter)

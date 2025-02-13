@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 import yaml
 import logging
 import pickle
-from config import INTERIM_DATA_DIR, MODELS_DIR, PARAMS_FILE, PROCESSED_DATA_DIR
+from config import INTERIM_DATA_DIR, MODELS_DIR, PARAMS_FILE, PROCESSED_DATA_DIR,LOGS_DIR
 from pathlib import Path
 # logging configuration
 logger = logging.getLogger('feature_engineering')
@@ -15,8 +15,8 @@ logger.setLevel('DEBUG')
 console_handler = logging.StreamHandler()
 console_handler.setLevel('DEBUG')
 
-file_handler = logging.FileHandler('feature_engineering_errors.log')
-file_handler.setLevel('ERROR')
+file_handler = logging.FileHandler(Path(LOGS_DIR) / f"{Path(__file__).stem}.log")
+file_handler.setLevel('DEBUG')
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(formatter)

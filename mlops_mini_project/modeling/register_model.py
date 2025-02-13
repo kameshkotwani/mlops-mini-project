@@ -1,9 +1,10 @@
 # register model
-from mlops_mini_project.config import MLFLOW_TRACKING_URI, REPORTS_DIR
+from mlops_mini_project.config import MLFLOW_TRACKING_URI, REPORTS_DIR,LOGS_DIR,STAGING
 import json
 import mlflow
 import logging
 import dagshub
+from pathlib import Path
 
 dagshub.init(
     repo_owner='kameshkotwani',
@@ -21,8 +22,8 @@ logger.setLevel('DEBUG')
 console_handler = logging.StreamHandler()
 console_handler.setLevel('DEBUG')
 
-file_handler = logging.FileHandler('model_registration_errors.log')
-file_handler.setLevel('ERROR')
+file_handler = logging.FileHandler(Path(LOGS_DIR) / f"{Path(__file__).stem}.log")
+file_handler.setLevel('DEBUG')
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(formatter)
@@ -55,15 +56,15 @@ def register_model(model_name: str, model_info: dict):
         # Register the model
         model_version = mlflow.register_model(model_uri, model_name)
 
-        # Transition the model to "Staging" stage
-        client = mlflow.tracking.MlflowClient()
-        client.transition_model_version_stage(
-            name=model_name,
-            version=model_version.version,
-            stage="Staging"
+        client = mlflow.MlflowClient()
+
+        client.set_registered_model_alias(
+                name=model_name,
+                version=model_version.version,
+                alias=STAGING
         )
 
-        logger.debug(f'Model {model_name} version {model_version.version} registered and transitioned to Staging.')
+        logger.debug(f'Model {model_name} version {model_version.version} registered with alias {STAGING}')
     except Exception as e:
         logger.error('Error during model registration: %s', e)
         raise

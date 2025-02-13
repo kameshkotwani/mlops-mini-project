@@ -12,8 +12,9 @@ import dagshub
 from sklearn.base import BaseEstimator
 import os
 from mlflow.models import infer_signature
+from pathlib import Path
 
-from mlops_mini_project.config import MODELS_DIR, PROCESSED_DATA_DIR, REPORTS_DIR, MLFLOW_TRACKING_URI
+from mlops_mini_project.config import MODELS_DIR, PROCESSED_DATA_DIR, REPORTS_DIR, MLFLOW_TRACKING_URI,LOGS_DIR
 
 # logging configuration
 logger = logging.getLogger('model_evaluation')
@@ -22,8 +23,8 @@ logger.setLevel('DEBUG')
 console_handler = logging.StreamHandler()
 console_handler.setLevel('DEBUG')
 
-file_handler = logging.FileHandler('model_evaluation_errors.log')
-file_handler.setLevel('ERROR')
+file_handler = logging.FileHandler(Path(LOGS_DIR) / f"{Path(__file__).stem}.log")
+file_handler.setLevel('DEBUG')
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(formatter)

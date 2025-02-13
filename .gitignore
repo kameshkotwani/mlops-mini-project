@@ -1,6 +1,6 @@
 # Data
 /data/
-
+/mlruns/
 
 /data/
 *.pkl

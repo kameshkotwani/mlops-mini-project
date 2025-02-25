@@ -21,18 +21,15 @@ from app.load_model import ModelLoader
 async def lifespan(app: FastAPI):
     #TODO: Load the model and vectorizer here
     print("Loading model and vectorizer...")
-    loader = ModelLoader(
-        model_name=MODEL_NAME,
-        vectorizer_name=VECTORIZER_NAME,
-    )
-    # model, vectorizer = loader.load_model()
-    model = None
-    vectorizer =None
+    loader = ModelLoader()
+    
 
+    model,vectorizer = loader.load_model()
+    app.state.model = model
+    app.state.vectorizer = vectorizer
 
-
-    # if model is None or vectorizer is None:
-    #     raise RuntimeError("Failed to load model or vectorizer")
+    if model is None or vectorizer is None:
+        raise RuntimeError("Failed to load model or vectorizer")
 
     print("Model and vectorizer loaded")
 
@@ -67,10 +64,10 @@ def predict(user_input: str = Form(...)):
         print(user_input)
 
         # applying bag of words using vectorizer
-        transformed_user_input = vectorizer.transform([user_input])
+        transformed_user_input = app.state.vectorizer.transform([user_input])
         # getting the prediction value
 
-        prediction = model.predict(transformed_user_input)[0]
+        prediction = app.state.model.predict(transformed_user_input)[0]
 
         output_sentiment = "negative" if prediction == 0 else "positive"
 

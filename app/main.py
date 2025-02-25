@@ -13,20 +13,21 @@ import numpy as np
 from app.data_preprocessing import normalize_text
 from app.config import MODEL_NAME,VECTORIZER_NAME
 from app.load_model import ModelLoader
-print("Loading model and vectorizer...")
-loader = ModelLoader(
-    model_name=MODEL_NAME,
-    vectorizer_name=VECTORIZER_NAME,
-)
-# model, vectorizer = loader.load_model()
-model = None
-vectorizer =None
 
 # get the model from mlflow
 # Load model and vectorizer at startup
 # Load model and vectorizer once during startup
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    
+    print("Loading model and vectorizer...")
+    loader = ModelLoader(
+        model_name=MODEL_NAME,
+        vectorizer_name=VECTORIZER_NAME,
+    )
+    # model, vectorizer = loader.load_model()
+    model = None
+    vectorizer =None
 
 
 

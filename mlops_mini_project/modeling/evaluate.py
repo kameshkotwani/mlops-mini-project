@@ -147,8 +147,10 @@ def main():
             # Log the model info file to MLflow
             mlflow.log_artifact(REPORTS_DIR / 'model_info.json')
 
+            # there is no need to log model errors
             # Log the evaluation errors log file to MLflow
-            mlflow.log_artifact('model_evaluation_errors.log')
+            # mlflow.log_artifact('model_evaluation_errors.log')
+        
         except Exception as e:
             logger.error('Failed to complete the model evaluation process: %s', e)
             print(f"Error: {e}")

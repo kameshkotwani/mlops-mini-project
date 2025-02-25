@@ -80,5 +80,3 @@ def normalize_text(user_input):
     except Exception as e:
         print(e)
 
-
-print(normalize_text("This is a stopword hi hello and testing a test to check if the fucntion is working or not!!!@@@@."))

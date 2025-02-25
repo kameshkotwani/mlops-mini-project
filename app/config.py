@@ -8,5 +8,4 @@ ARTIFACTS_DIR = PROJ_ROOT / "artifacts"
 
 MODEL_NAME = 'model.pkl'
 VECTORIZER_NAME = 'vectorizer.pkl'
-import dagshub
-dagshub.init(repo_owner='kameshkotwani', repo_name='mlops-mini-project', mlflow=True)
+

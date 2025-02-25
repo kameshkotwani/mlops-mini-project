@@ -19,7 +19,7 @@ from app.load_model import ModelLoader
 # Load model and vectorizer once during startup
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    
+    #TODO: Load the model and vectorizer here
     print("Loading model and vectorizer...")
     loader = ModelLoader(
         model_name=MODEL_NAME,

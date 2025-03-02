@@ -101,8 +101,8 @@ stages:
     deps:
     - path: mlops_mini_project/modeling/register_model.py
       hash: md5
-      md5: b7d4e940fc78966d1a45c5122d67804b
-      size: 2493
+      md5: 48cd195cbcc36f75725e27b096dc3c80
+      size: 3018
     - path: reports/model_info.json
       hash: md5
       md5: c17fb66aaf9b6ba7c89c08a5f7e7289c

@@ -1,10 +1,59 @@
-# mlops-mini-project
+# Sentiment Analysis using FastAPI,Logistic Regression, and MLOps.
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
 </a>
 
-A complete MLOps lifecycle project
+
+# Sentiment Analysis MLOps Project Workflow  
+
+This Sentiment Analysis MLOps Pipeline automates the process of data ingestion, preprocessing, model training, evaluation, versioning, and deployment. The project enables real-time sentiment predictions using Machine Learning (ML) and MLOps best practices.
+
+ What This Project Does
+✔ Predicts sentiment from user text (real-time classification).
+✔ Implements MLOps best practices (MLflow, DVC, CI/CD).
+✔ Optimizes performance using different ML models.
+✔ Deploys an API for scalable real-time inference.
+✔ Ensures reproducibility with proper version control.
+
+
+
+## 1. Data Collection & Preprocessing  
+- **Data Source:** Public sentiment datasets (e.g., IMDb, Twitter, Amazon Reviews).  
+- **Preprocessing Steps:**  
+  - Remove stopwords, punctuation, and special characters.  
+  - Tokenization and vectorization using Bag of Words, CountVectorizer, or TF-IDF.  
+  - Handle class imbalance using SMOTE or undersampling.  
+
+## 2. Model Training & Experimentation  
+- **Algorithms Used:**  
+  - Logistic Regression as the baseline model.  
+  - Naïve Bayes, Random Forest, and XGBoost for performance comparison.  
+  - Deep Learning models such as LSTMs or Transformers (BERT) for improved accuracy.  
+- **Hyperparameter tuning** with GridSearchCV to optimize model performance.  
+
+## 3. Model Tracking & Versioning (MLOps Integration)  
+- **MLflow** for:  
+  - Experiment tracking (logging hyperparameters, metrics).  
+  - Model versioning (storing multiple trained models).  
+- **DVC (Data Version Control)** to track dataset versions and ensure reproducibility.  
+
+## 4. Model Evaluation  
+- **Metrics Used:**  
+  - Accuracy, Precision, Recall, and F1-score.  
+  - Confusion Matrix and ROC Curve for interpretability.  
+- Compare ML models to select the best-performing one.  
+
+## 5. Model Deployment (FastAPI on AWS)  
+- **Containerization using Docker** to package the application.  
+- **FastAPI API endpoint** to expose the trained model for real-time inference.  
+- **Deployment on AWS (EC2/S3)** for scalability.  
+
+## 6. Real-Time Predictions & API Usage  
+- User sends text input via API.  
+- The model processes and classifies sentiment as Positive, Neutral, or Negative.  
+- Response is returned in JSON format with confidence scores.  
+
 
 ## Project Organization
 

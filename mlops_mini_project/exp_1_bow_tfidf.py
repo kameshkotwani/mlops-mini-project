@@ -7,6 +7,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
+from app.config import MLFLOW_TRACKING_URI
 from xgboost import XGBClassifier
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
@@ -20,8 +21,7 @@ import os
 
 import dagshub
 
-dagshub.init(repo_owner='kameshkotwani', repo_name='mlops-mini-project', mlflow=True)
-mlflow.set_tracking_uri("https://dagshub.com/kameshkotwani/mlops-mini-project.mlflow")
+mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 
 # Load the data
 df = pd.read_csv('https://raw.githubusercontent.com/campusx-official/jupyter-masterclass/main/tweet_emotions.csv').drop(columns=['tweet_id'])

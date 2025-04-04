@@ -81,8 +81,8 @@ stages:
     deps:
     - path: mlops_mini_project/modeling/evaluate.py
       hash: md5
-      md5: a85b08a284408c66978fd69570e3a43d
-      size: 5676
+      md5: 471363d9debd7cdaf0d7d1f29e22ccb1
+      size: 5716
     - path: models/model.pkl
       hash: md5
       md5: 9bf42877ca650058f305994c79488d8c
@@ -94,16 +94,16 @@ stages:
       size: 140
     - path: reports/model_info.json
       hash: md5
-      md5: 208c4c5f4e67fba624d1897125d6ae9c
+      md5: 3748516010685188e5ec5cd69dad7164
       size: 79
   model_registration:
     cmd: python -m mlops_mini_project.modeling.register_model
     deps:
     - path: mlops_mini_project/modeling/register_model.py
       hash: md5
-      md5: 48cd195cbcc36f75725e27b096dc3c80
-      size: 3018
+      md5: 58996b0e1d3e5583fb7292bb1743610d
+      size: 3005
     - path: reports/model_info.json
       hash: md5
-      md5: 208c4c5f4e67fba624d1897125d6ae9c
+      md5: 3748516010685188e5ec5cd69dad7164
       size: 79

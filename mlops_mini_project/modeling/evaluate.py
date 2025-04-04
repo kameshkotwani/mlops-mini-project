@@ -10,9 +10,9 @@ import mlflow
 import mlflow.sklearn
 import dagshub
 from sklearn.base import BaseEstimator
-import os
 from mlflow.models import infer_signature
 from pathlib import Path
+from mlops_mini_project.modeling.dagshub_token_auth import get_dagshub_token
 
 from mlops_mini_project.config import MODELS_DIR, PROCESSED_DATA_DIR, REPORTS_DIR, MLFLOW_TRACKING_URI,LOGS_DIR
 
@@ -105,8 +105,9 @@ def save_model_info(run_id: str, model_path: str, file_path: str) -> None:
         raise
 
 def main():
-    dagshub.init(repo_owner='kameshkotwani', repo_name='mlops-mini-project', mlflow=True)
-
+    # setting up the dagshub token
+    get_dagshub_token()
+    
     # Set up MLflow tracking URI
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     mlflow.set_experiment("dvc-pipeline")

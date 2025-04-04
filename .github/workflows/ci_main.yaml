@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           uv sync
-          
+
       # adding .venv to PATH
       - name: Add .venv to PATH
         run: |
@@ -36,5 +36,7 @@ jobs:
 
       # run dvc pipeline
       - name: Run DVC pipeline
+        env:
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
         run: |
           dvc repro

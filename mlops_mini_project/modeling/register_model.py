@@ -3,14 +3,10 @@ from mlops_mini_project.config import MLFLOW_TRACKING_URI, REPORTS_DIR,LOGS_DIR,
 import json
 import mlflow
 import logging
-import dagshub
 from pathlib import Path
 
-dagshub.init(
-    repo_owner='kameshkotwani',
-    repo_name='mlops-mini-project',
-    mlflow=True
-)
+from mlops_mini_project.modeling.dagshub_token_auth import get_dagshub_token
+
 
 # Set up MLflow tracking URI
 mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
@@ -78,6 +74,7 @@ def register_model(model_name: str, model_info: dict,model_metrics:dict):
 
 
 def main():
+    get_dagshub_token()
     try:
         model_info_path = REPORTS_DIR /  'model_info.json'
         model_metrics_path = REPORTS_DIR / 'metrics.json'

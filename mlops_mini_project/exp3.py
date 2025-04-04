@@ -12,12 +12,12 @@ import re
 import string
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-import numpy as np
-import os
-import dagshub
 
-dagshub.init(repo_owner='kameshkotwani', repo_name='mlops-mini-project', mlflow=True)
-mlflow.set_tracking_uri("https://dagshub.com/kameshkotwani/mlops-mini-project.mlflow")
+
+from app.config import MLFLOW_TRACKING_URI
+
+
+mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 
 # Load the data
 # Load the data

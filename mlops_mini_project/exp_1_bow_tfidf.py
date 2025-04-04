@@ -113,8 +113,6 @@ with mlflow.start_run(run_name="All Experiments") as parent_run:
                 X = vectorizer.fit_transform(df['content'])
                 y = df['sentiment']
                 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-                
-
                 # Log preprocessing parameters
                 mlflow.log_param("vectorizer", vec_name)
                 mlflow.log_param("algorithm", algo_name)
@@ -142,26 +140,15 @@ with mlflow.start_run(run_name="All Experiments") as parent_run:
                 
                 # Model evaluation
                 y_pred = model.predict(X_test)
-                accuracy = accuracy_score(y_test, y_pred)
-                precision = precision_score(y_test, y_pred)
-                recall = recall_score(y_test, y_pred)
-                f1 = f1_score(y_test, y_pred)
-                
                 # Log evaluation metrics
-                mlflow.log_metric("accuracy", accuracy)
-                mlflow.log_metric("precision", precision)
-                mlflow.log_metric("recall", recall)
-                mlflow.log_metric("f1_score", f1)
+                mlflow.log_metric("accuracy", accuracy_score(y_test, y_pred))
+                mlflow.log_metric("precision", precision_score(y_test, y_pred))
+                mlflow.log_metric("recall", recall_score(y_test, y_pred))
+                mlflow.log_metric("f1_score", f1_score(y_test, y_pred))
                 
                 # Log model
                 mlflow.sklearn.log_model(model, "model")
                 
                 # Save and log the notebook
                 mlflow.log_artifact(__file__)
-                
-                # Print the results for verification
-                print(f"Algorithm: {algo_name}, Feature Engineering: {vec_name}")
-                print(f"Accuracy: {accuracy}")
-                print(f"Precision: {precision}")
-                print(f"Recall: {recall}")
-                print(f"F1 Score: {f1}")
+    

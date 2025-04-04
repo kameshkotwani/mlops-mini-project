@@ -94,7 +94,7 @@ stages:
       size: 140
     - path: reports/model_info.json
       hash: md5
-      md5: 3748516010685188e5ec5cd69dad7164
+      md5: 9ddf8b4e71f6c51f2e0f5a6be919cf1b
       size: 79
   model_registration:
     cmd: python -m mlops_mini_project.modeling.register_model
@@ -105,5 +105,5 @@ stages:
       size: 3005
     - path: reports/model_info.json
       hash: md5
-      md5: 3748516010685188e5ec5cd69dad7164
+      md5: 9ddf8b4e71f6c51f2e0f5a6be919cf1b
       size: 79

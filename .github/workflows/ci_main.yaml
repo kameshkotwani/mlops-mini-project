@@ -17,7 +17,7 @@ jobs:
           version: '0.5.26'
           enable-cache: true
           
-      # setting up python using uv
+      # setting up python for the project alternatively, we can use the uv install python as well.
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -27,6 +27,12 @@ jobs:
       - name: Install dependencies
         run: |
           uv sync
+          
+      # adding .venv to PATH
+      - name: Add .venv to PATH
+        run: |
+            echo "VIRTUAL_ENV=$(pwd)/.venv" >> $GITHUB_ENV
+            echo "$(pwd)/.venv/bin" >> $GITHUB_PATH
 
       # run dvc pipeline
       - name: Run DVC pipeline

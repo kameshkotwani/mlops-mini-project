@@ -15,4 +15,5 @@ dependencies = [
     "python-dotenv>=1.0.1",
     "fastapi[standard]",
     "ipykernel>=6.29.5",
+    "dvc>=3.59.1",
 ]

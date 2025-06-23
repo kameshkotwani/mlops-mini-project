@@ -52,8 +52,11 @@ This Sentiment Analysis MLOps Pipeline automates the process of data ingestion, 
 ## 6. Real-Time Predictions & API Usage  
 - User sends text input via API.  
 - The model processes and classifies sentiment as Positive, Neutral, or Negative.  
-- Response is returned in JSON format with confidence scores.  
+- Response is returned in JSON format with confidence scores.
 
+- ## 7. System Design
+
+![Blank diagram - Sentiment-Analysis-System Design](https://github.com/user-attachments/assets/447d404b-ac6c-49a2-8f1d-80458b7c9483)
 
 ## Project Organization
 
